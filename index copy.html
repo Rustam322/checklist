@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check List</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Roboto', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <img style="width: 300px;" src="https://marketing.uz/uploads/articles/5412/article-original.png" alt="">
+    <h1 class="text-2xl font-bold text-center mb-6">CHECK LIST</h1>
+    
+    <form id="checklist-form" onsubmit="submitForm(event)" class="space-y-6">
+      <div class="grid grid-cols-2 gap-6">
+        <!-- Левый столбец с вопросами -->
+        <div class="space-y-4">
+          <div>
+            <label class="block font-medium text-gray-700">Имя Фамилия</label>
+            <input type="text" name="name" class="w-full border rounded px-3 py-1.5" required>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-1/2">
+              <label class="block font-medium text-gray-700">Пришёл</label>
+              <input type="time" name="arrival_time" class="w-full border rounded px-3 py-1.5" required>
+            </div>
+            <div class="w-1/2">
+              <label class="block font-medium text-gray-700">Ушёл</label>
+              <input type="time" name="leave_time" class="w-full border rounded px-3 py-1.5" required>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-medium text-gray-700">Сегодня какие недостатки были?</label>
+            <input type="text" name="negatives" class="w-full border rounded px-3 py-1.5">
+          </div>
+
+          <div>
+            <label class="block font-medium text-gray-700">Дополнительные дела которые вы сделали</label>
+            <input type="text" name="additional" class="w-full border rounded px-3 py-1.5">
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <label class="font-medium text-gray-700">Сегодня вы были опрятны на работе?</label>
+            <input type="checkbox" name="neatness" class="form-checkbox h-5 w-5 text-blue-600">
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="font-medium text-gray-700">Вы на работе всегда с красивой улыбкой</label>
+            <input type="checkbox" name="smiling" class="form-checkbox h-5 w-5 text-blue-600">
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="font-medium text-gray-700">Выполнение плана на сегодня?</label>
+            <input type="checkbox" name="plan" class="form-checkbox h-5 w-5 text-blue-600">
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="font-medium text-gray-700">Введети ли вы журнал</label>
+            <input type="checkbox" name="journal" class="form-checkbox h-5 w-5 text-blue-600">
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="font-medium text-gray-700">Саблюдайте ли вы чистоту в классе</label>
+            <input type="checkbox" name="cleanliness" class="form-checkbox h-5 w-5 text-blue-600">
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="font-medium text-gray-700">Сообщение о нарушении  учеников тютору или</label>
+            <input type="checkbox" name="report" class="form-checkbox h-5 w-5 text-blue-600">
+          </div>
+
+       
+
+          <div>
+            <label class="block font-medium text-gray-700">Дата</label>
+            <input type="date" name="date" class="w-full border rounded px-3 py-1.5" required>
+          </div>
+        </div>
+      </div>
+
+      <footer class="mt-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="block font-medium text-gray-700">Подпись сотрудника</label>
+            <input type="text" name="employee_signature" class="w-full border rounded px-3 py-1.5" required>
+          </div>
+
+          <div class="space-y-2">
+            <label class="block font-medium text-gray-700">Подпись руководителя</label>
+            <input type="text" name="manager_signature" class="w-full border rounded px-3 py-1.5" required>
+          </div>
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-6 rounded shadow-lg hover:bg-blue-600 transition duration-200 w-full mt-4">Отправить</button>
+      </footer>
+    </form>
+  </div>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      
+      fetch('https://script.google.com/macros/s/AKfycbzolLlGZPn89rrDxJHB21OjYHjk6s3QFn5TPj_vbBdg_tLVEC-yclrBcfPPk2yOy8AX/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => alert(data))
+      .catch(error => alert('Произошла ошибка'));
+    }
+  </script>
+
+</body>
+</html>
