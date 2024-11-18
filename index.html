@@ -7,6 +7,8 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body { font-family:sans-serif; }
   </style>
@@ -125,19 +127,51 @@
   </div>
 
   <script>
-    function submitForm(event) {
-      event.preventDefault();
+    // function submitForm(event) {
+    //   event.preventDefault();
 
-      const formData = new FormData(event.target);
+    //   const formData = new FormData(event.target);
       
-      fetch('https://script.google.com/macros/s/AKfycbzolLlGZPn89rrDxJHB21OjYHjk6s3QFn5TPj_vbBdg_tLVEC-yclrBcfPPk2yOy8AX/exec', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(data => alert(data))
-      .catch(error => alert('Произошла ошибка'));
-    }
+    //   fetch('https://script.google.com/macros/s/AKfycbzolLlGZPn89rrDxJHB21OjYHjk6s3QFn5TPj_vbBdg_tLVEC-yclrBcfPPk2yOy8AX/exec', {
+    //     method: 'POST',
+    //     body: formData
+    //   })
+    //   .then(response => response.text())
+    //   .then(data => alert(data))
+    //   .catch(error => alert('Произошла ошибка'));
+    // }
+    function submitForm(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  fetch('https://script.google.com/macros/s/AKfycbzolLlGZPn89rrDxJHB21OjYHjk6s3QFn5TPj_vbBdg_tLVEC-yclrBcfPPk2yOy8AX/exec', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.text())
+    .then(data => {
+      // Если отправка успешна, показываем успех
+      Swal.fire({
+        title: 'Успешно!',
+        text: 'Данные были отправлены.',
+        icon: 'success',
+        confirmButtonText: 'ОК',
+      });
+      // Очистка формы после отправки
+      event.target.reset();
+    })
+    .catch(error => {
+      // Если произошла ошибка, показываем сообщение об ошибке
+      Swal.fire({
+        title: 'Ошибка!',
+        text: 'Произошла ошибка при отправке данных. Попробуйте снова.',
+        icon: 'error',
+        confirmButtonText: 'ОК',
+      });
+    });
+}
+
   </script>
 
 </body>
